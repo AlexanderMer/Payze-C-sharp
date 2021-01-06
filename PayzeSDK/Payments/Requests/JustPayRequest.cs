@@ -2,6 +2,8 @@ namespace PayzeSDK.Requests
 {
     public class JustPayRequest
     {
+        public string Method { get; } = "justPay";
+        
         public decimal Amount { get; set; }
 
         public string Currency { get; set; }

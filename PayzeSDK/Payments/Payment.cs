@@ -34,7 +34,7 @@ namespace PayzeSDK.Payments
             var client = new RestClient("https://payze.io/api/v1") {Timeout = -1};
             var request = new RestRequest(Method.POST);
             request.AddHeader("Content-Type", "application/json");
-            request.AddParameter($"application/json", $"{{\"method\": \"justPay\"," +
+            request.AddParameter($"application/json", $"{{\"method\": \"{justPayRequest.Method}\"," +
                                                       $"  \"apiKey\": \"{this._apiKey.Key}\"," +
                                                       $" \"apiSecret\": \"{this._apiKey.Secret}\"," +
                                                       $" \"data\": {{\"amount\": \"{justPayRequest.Amount}\"," +
