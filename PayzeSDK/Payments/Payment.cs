@@ -39,8 +39,8 @@ namespace PayzeSDK.Payments
                                                       $" \"apiSecret\": \"{this._apiKey.Secret}\"," +
                                                       $" \"data\": {{\"amount\": \"{justPayRequest.Amount}\"," +
                                                       $"     \"currency\": \"{justPayRequest.Currency}\"," +
-                                                      $"     \"callback\": \"{justPayRequest.CallBack}\"," +
-                                                      $"  \"callbackError\": \"{justPayRequest.CallBackError}\"," +
+                                                      $"     \"callback\": \"{justPayRequest.CallbackUrl}\"," +
+                                                      $"  \"callbackError\": \"{justPayRequest.CallbackErrorUrl}\"," +
                                                       $" " +
                                                       $"    \"preauthorize\": {justPayRequest.Preauthorize.ToString().ToLower()}" +
                                                       $" }}}}",  ParameterType.RequestBody);
@@ -48,6 +48,47 @@ namespace PayzeSDK.Payments
             var response = client.Execute<JustPayResponse>(request);
 
             return response.Data;
+        }
+
+        public JustPayAndSplitResponse JustPayAndSplit(JustPayAndSplitRequest payAndSplitRequest)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public AddCardResponse AddCard(AddCardRequest addCardRequest)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public PayWithCardResponse PayWithCard(PayWithCardRequest payWithCardRequest)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public PayWithCardAndSplitResponse PayWithCardAndSplit(PayWithCardAndSplitRequest payWithCardAndSplitRequest)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public GetTransactionInformationResponse GetTransactionInformation(
+            GetTransactionInformationRequest getTransactionInformationRequest)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public RefundTransactionResponse RefundTransaction(RefundTransactionRequest refundTransactionRequest)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public GetMerchantBalanceResponse GetMerchantBalance(GetMerchantBalanceRequest getMerchantBalanceRequest)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public CommitTransactionResponse CommitTransaction(CommitTransactionRequest commitTransactionRequest)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
