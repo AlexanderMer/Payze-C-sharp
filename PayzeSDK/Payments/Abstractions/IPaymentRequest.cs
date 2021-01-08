@@ -1,6 +1,6 @@
 namespace PayzeSDK.Payments.Abstractions
 {
-    public interface IRequest
+    public interface IPaymentRequest
     {
         public string Method { get; }
     }

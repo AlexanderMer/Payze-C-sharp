@@ -1,8 +1,9 @@
 using PayzeSDK.Payments.Abstractions;
 
-namespace PayzeSDK.Requests
+namespace PayzeSDK.Payments.Requests
 {
-    public class AddCardRequest : IRequest
+    // ReSharper disable once ClassNeverInstantiated.Global
+    public class AddCardPaymentRequest : IPaymentRequest
     {
         public string Method { get; } = "addCard";
 

@@ -1,6 +1,7 @@
 ﻿using PayzeSDK.Payments.Abstractions;
+using PayzeSDK.Payments.Exceptions;
+using PayzeSDK.Payments.Requests;
 using PayzeSDK.Payments.Responses;
-using PayzeSDK.Requests;
 using RestSharp;
 
 namespace PayzeSDK.Payments
@@ -18,11 +19,48 @@ namespace PayzeSDK.Payments
         public string Secret { get; }
     }
 
-    
-
     public class Payment : IPayment
     {
         private readonly ApiKey _apiKey;
+        private readonly RestClient _restClient = new RestClient("https://payze.io/api/v1") {Timeout = -1};
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="restRequest"></param>
+        /// <typeparam name="T">Response data class</typeparam>
+        /// <returns></returns>
+        /// <exception cref="PaymentException">Throws in case of unsuccessful request</exception>
+        private T MakeRequest<T>(IRestRequest restRequest)
+        {
+            var result = _restClient.Execute<T>(restRequest);
+
+            if (!result.IsSuccessful)
+            {
+                throw new PaymentException(result.ErrorMessage);
+            }
+            
+            return result.Data;
+        }
+
+        private T MakePaymentRequest<T>(IPaymentRequest paymentRequest)
+        {
+            var request = new RestRequest(Method.POST);
+            
+            var body = GetBaseRequetJson(paymentRequest); 
+            body.Add("method", paymentRequest.Method);
+            body.Add("data", paymentRequest);
+            
+            request.AddHeader("Content-Type", "application/json");
+            request.AddParameter("application/json", body, ParameterType.RequestBody);
+
+            return MakeRequest<T>(request);
+        }
+
+        private JsonObject GetBaseRequetJson(IPaymentRequest paymentRequest)
+        {
+            return new JsonObject {{"apiKey", _apiKey.Key}, {"apiSecret", _apiKey.Secret}};
+        }
         
         public Payment(ApiKey apiKey)
         {
@@ -31,64 +69,43 @@ namespace PayzeSDK.Payments
         
         public JustPayResponse JustPay(JustPayRequest justPayRequest)
         {
-            var client = new RestClient("https://payze.io/api/v1") {Timeout = -1};
-            var request = new RestRequest(Method.POST);
-            request.AddHeader("Content-Type", "application/json");
-            request.AddParameter($"application/json", $"{{\"method\": \"{justPayRequest.Method}\"," +
-                                                      $"  \"apiKey\": \"{this._apiKey.Key}\"," +
-                                                      $" \"apiSecret\": \"{this._apiKey.Secret}\"," +
-                                                      $" \"data\": {{\"amount\": \"{justPayRequest.Amount}\"," +
-                                                      $"     \"currency\": \"{justPayRequest.Currency}\"," +
-                                                      $"     \"callback\": \"{justPayRequest.CallbackUrl}\"," +
-                                                      $"  \"callbackError\": \"{justPayRequest.CallbackErrorUrl}\"," +
-                                                      $" " +
-                                                      $"    \"preauthorize\": {justPayRequest.Preauthorize.ToString().ToLower()}" +
-                                                      $" }}}}",  ParameterType.RequestBody);
-            
-            var response = client.Execute<JustPayResponse>(request);
-
-            return response.Data;
+            return MakePaymentRequest<JustPayResponse>(justPayRequest);
         }
 
-        public JustPayAndSplitResponse JustPayAndSplit(JustPayAndSplitRequest payAndSplitRequest)
+        public AddCardResponse AddCard(AddCardPaymentRequest addCardPaymentRequest)
         {
-            throw new System.NotImplementedException();
+            return MakePaymentRequest<AddCardResponse>(addCardPaymentRequest);
         }
 
-        public AddCardResponse AddCard(AddCardRequest addCardRequest)
+        public PayWithCardResponse PayWithCard(PayWithCardPaymentRequest payWithCardPaymentRequest)
         {
-            throw new System.NotImplementedException();
+            return MakePaymentRequest<PayWithCardResponse>(payWithCardPaymentRequest);
         }
 
-        public PayWithCardResponse PayWithCard(PayWithCardRequest payWithCardRequest)
+        public PayWithCardAndSplitResponse PayWithCardAndSplit(PayWithCardAndSplitPaymentRequest payWithCardAndSplitPaymentRequest)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public PayWithCardAndSplitResponse PayWithCardAndSplit(PayWithCardAndSplitRequest payWithCardAndSplitRequest)
-        {
-            throw new System.NotImplementedException();
+            return MakePaymentRequest<PayWithCardAndSplitResponse>(payWithCardAndSplitPaymentRequest);
         }
 
         public GetTransactionInformationResponse GetTransactionInformation(
-            GetTransactionInformationRequest getTransactionInformationRequest)
+            GetTransactionInformationPaymentRequest getTransactionInformationPaymentRequest)
         {
-            throw new System.NotImplementedException();
+            return MakePaymentRequest<GetTransactionInformationResponse>(getTransactionInformationPaymentRequest);
         }
 
-        public RefundTransactionResponse RefundTransaction(RefundTransactionRequest refundTransactionRequest)
+        public RefundTransactionResponse RefundTransaction(RefundTransactionPaymentRequest refundTransactionPaymentRequest)
         {
-            throw new System.NotImplementedException();
+            return MakePaymentRequest<RefundTransactionResponse>(refundTransactionPaymentRequest);
         }
 
-        public GetMerchantBalanceResponse GetMerchantBalance(GetMerchantBalanceRequest getMerchantBalanceRequest)
+        public GetMerchantBalanceResponse GetMerchantBalance(GetMerchantBalancePaymentRequest getMerchantBalancePaymentRequest)
         {
-            throw new System.NotImplementedException();
+            return MakePaymentRequest<GetMerchantBalanceResponse>(getMerchantBalancePaymentRequest);
         }
 
-        public CommitTransactionResponse CommitTransaction(CommitTransactionRequest commitTransactionRequest)
+        public CommitTransactionResponse CommitTransaction(CommitTransactionPaymentRequest commitTransactionPaymentRequest)
         {
-            throw new System.NotImplementedException();
+            return MakePaymentRequest<CommitTransactionResponse>(commitTransactionPaymentRequest);
         }
     }
 }

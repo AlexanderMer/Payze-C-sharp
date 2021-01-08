@@ -1,5 +1,5 @@
+using PayzeSDK.Payments.Requests;
 using PayzeSDK.Payments.Responses;
-using PayzeSDK.Requests;
 
 namespace PayzeSDK.Payments.Abstractions
 {
@@ -7,20 +7,18 @@ namespace PayzeSDK.Payments.Abstractions
     {
         public JustPayResponse JustPay(JustPayRequest justPayRequest );
 
-        public JustPayAndSplitResponse JustPayAndSplit(JustPayAndSplitRequest payAndSplitRequest );
+        public AddCardResponse AddCard(AddCardPaymentRequest addCardPaymentRequest );
         
-        public AddCardResponse AddCard(AddCardRequest addCardRequest );
+        public PayWithCardResponse PayWithCard(PayWithCardPaymentRequest payWithCardPaymentRequest );
         
-        public PayWithCardResponse PayWithCard(PayWithCardRequest payWithCardRequest );
+        public PayWithCardAndSplitResponse PayWithCardAndSplit(PayWithCardAndSplitPaymentRequest payWithCardAndSplitPaymentRequest );
         
-        public PayWithCardAndSplitResponse PayWithCardAndSplit(PayWithCardAndSplitRequest payWithCardAndSplitRequest );
+        public GetTransactionInformationResponse GetTransactionInformation(GetTransactionInformationPaymentRequest getTransactionInformationPaymentRequest );
         
-        public GetTransactionInformationResponse GetTransactionInformation(GetTransactionInformationRequest getTransactionInformationRequest );
+        public RefundTransactionResponse RefundTransaction(RefundTransactionPaymentRequest refundTransactionPaymentRequest );
         
-        public RefundTransactionResponse RefundTransaction(RefundTransactionRequest refundTransactionRequest );
+        public GetMerchantBalanceResponse GetMerchantBalance(GetMerchantBalancePaymentRequest getMerchantBalancePaymentRequest );
         
-        public GetMerchantBalanceResponse GetMerchantBalance(GetMerchantBalanceRequest getMerchantBalanceRequest );
-        
-        public CommitTransactionResponse CommitTransaction(CommitTransactionRequest commitTransactionRequest );
+        public CommitTransactionResponse CommitTransaction(CommitTransactionPaymentRequest commitTransactionPaymentRequest );
     }
 }

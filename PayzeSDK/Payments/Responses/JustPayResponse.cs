@@ -1,27 +1,18 @@
 using System;
-using PayzeSDK.Requests;
 
 namespace PayzeSDK.Payments.Responses
 {
+    // ReSharper disable once ClassNeverInstantiated.Global
     public class TransactionResponse
     {
         public string TransactionUrl { get; set; }
         
         public string TransactionId { get; set; }
     }
-    
+
+    // ReSharper disable once ClassNeverInstantiated.Global
     public class JustPayResponse
     {
-        public int Id { get; set; }
-
-        public string Status { get; set; }
-
-        public string Action { get; set; }
-
-        public DateTime CreatedDate { get; set; }
-
-        public JustPayRequest Request { get; set; }
-
         public string TransactionUrl { get; private set; }
 
         public string TransactionId { get; private set; }

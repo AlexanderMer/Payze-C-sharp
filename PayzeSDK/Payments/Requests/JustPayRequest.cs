@@ -1,6 +1,10 @@
-namespace PayzeSDK.Requests
+using System.Collections.Generic;
+using PayzeSDK.Payments.Abstractions;
+using PayzeSDK.Payments.Requests.Helpers;
+
+namespace PayzeSDK.Payments.Requests
 {
-    public class JustPayRequest
+    public class JustPayRequest : IPaymentRequest
     {
         public string Method { get; } = "justPay";
         
@@ -13,5 +17,7 @@ namespace PayzeSDK.Requests
         public string CallbackErrorUrl { get; set; }
 
         public bool Preauthorize { get; set; }
+        
+        public List<Split> Splits { get; set; }
     }
 }
