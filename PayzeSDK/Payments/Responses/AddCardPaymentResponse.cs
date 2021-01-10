@@ -1,19 +1,21 @@
-using System;
 using PayzeSDK.Payments.Abstractions;
 
 namespace PayzeSDK.Payments.Responses
 {
     // ReSharper disable once ClassNeverInstantiated.Global
-    public class JustPayResponse : PaymentResponse
+    public class AddCardPaymentResponse : PaymentResponse
     {
-        public string TransactionUrl { get; private set; }
+        public string CardId { get; set; }
 
-        public string TransactionId { get; private set; }
+        public string TransactionUrl { get; set; }
 
-        public JustPayResponse Response
+        public string TransactionId { get; set; }
+
+        public AddCardPaymentResponse Response
         {
             set
             {
+                CardId = value.CardId;
                 TransactionUrl = value.TransactionUrl;
                 TransactionId = value.TransactionId;
             }

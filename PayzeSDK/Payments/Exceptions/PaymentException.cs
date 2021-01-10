@@ -2,13 +2,11 @@ using System;
 
 namespace PayzeSDK.Payments.Exceptions
 {
+    [Serializable]
     public class PaymentException : Exception
     {
-        public PaymentException(string message)
+        public PaymentException(string message) : base(message)
         {
-            Message = message;
         }
-        
-        public override string Message { get; }
     }
 }

@@ -24,6 +24,11 @@ namespace PayzeSDK.Payments
         private readonly ApiKey _apiKey;
         private readonly RestClient _restClient = new RestClient("https://payze.io/api/v1") {Timeout = -1};
         
+        public Payment(ApiKey apiKey)
+        {
+            _apiKey = apiKey;
+        }
+        
         /// <summary>
         /// 
         /// </summary>
@@ -47,7 +52,7 @@ namespace PayzeSDK.Payments
         {
             var request = new RestRequest(Method.POST);
             
-            var body = GetBaseRequetJson(paymentRequest); 
+            var body = GetBaseRequestJson(); 
             body.Add("method", paymentRequest.Method);
             body.Add("data", paymentRequest);
             
@@ -57,55 +62,45 @@ namespace PayzeSDK.Payments
             return MakeRequest<T>(request);
         }
 
-        private JsonObject GetBaseRequetJson(IPaymentRequest paymentRequest)
+        private JsonObject GetBaseRequestJson()
         {
             return new JsonObject {{"apiKey", _apiKey.Key}, {"apiSecret", _apiKey.Secret}};
         }
         
-        public Payment(ApiKey apiKey)
+        public JustPayResponse JustPay(JustPay justPay)
         {
-            _apiKey = apiKey;
-        }
-        
-        public JustPayResponse JustPay(JustPayRequest justPayRequest)
-        {
-            return MakePaymentRequest<JustPayResponse>(justPayRequest);
+            return MakePaymentRequest<JustPayResponse>(justPay);
         }
 
-        public AddCardResponse AddCard(AddCardPaymentRequest addCardPaymentRequest)
+        public AddCardPaymentResponse AddCard(AddCardRequest addCardRequest)
         {
-            return MakePaymentRequest<AddCardResponse>(addCardPaymentRequest);
+            return MakePaymentRequest<AddCardPaymentResponse>(addCardRequest);
         }
 
-        public PayWithCardResponse PayWithCard(PayWithCardPaymentRequest payWithCardPaymentRequest)
+        public PayWithCardResponse PayWithCard(PayWithCard payWithCard)
         {
-            return MakePaymentRequest<PayWithCardResponse>(payWithCardPaymentRequest);
-        }
-
-        public PayWithCardAndSplitResponse PayWithCardAndSplit(PayWithCardAndSplitPaymentRequest payWithCardAndSplitPaymentRequest)
-        {
-            return MakePaymentRequest<PayWithCardAndSplitResponse>(payWithCardAndSplitPaymentRequest);
+            return MakePaymentRequest<PayWithCardResponse>(payWithCard);
         }
 
         public GetTransactionInformationResponse GetTransactionInformation(
-            GetTransactionInformationPaymentRequest getTransactionInformationPaymentRequest)
+            GetTransactionInformationRequest getTransactionInformationRequest)
         {
-            return MakePaymentRequest<GetTransactionInformationResponse>(getTransactionInformationPaymentRequest);
+            return MakePaymentRequest<GetTransactionInformationResponse>(getTransactionInformationRequest);
         }
 
-        public RefundTransactionResponse RefundTransaction(RefundTransactionPaymentRequest refundTransactionPaymentRequest)
+        public RefundTransactionResponse RefundTransaction(RefundTransactionRequest refundTransactionRequest)
         {
-            return MakePaymentRequest<RefundTransactionResponse>(refundTransactionPaymentRequest);
+            return MakePaymentRequest<RefundTransactionResponse>(refundTransactionRequest);
         }
 
-        public GetMerchantBalanceResponse GetMerchantBalance(GetMerchantBalancePaymentRequest getMerchantBalancePaymentRequest)
+        public GetMerchantBalancePaymentResponse GetMerchantBalance(GetMerchantBalanceRequest getMerchantBalanceRequest)
         {
-            return MakePaymentRequest<GetMerchantBalanceResponse>(getMerchantBalancePaymentRequest);
+            return MakePaymentRequest<GetMerchantBalancePaymentResponse>(getMerchantBalanceRequest);
         }
 
-        public CommitTransactionResponse CommitTransaction(CommitTransactionPaymentRequest commitTransactionPaymentRequest)
+        public CommitTransactionPaymentResponse CommitTransaction(CommitTransactionRequest commitTransactionRequest)
         {
-            return MakePaymentRequest<CommitTransactionResponse>(commitTransactionPaymentRequest);
+            return MakePaymentRequest<CommitTransactionPaymentResponse>(commitTransactionRequest);
         }
     }
 }

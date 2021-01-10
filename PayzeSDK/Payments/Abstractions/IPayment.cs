@@ -1,3 +1,4 @@
+using PayzeSDK.Payments.Exceptions;
 using PayzeSDK.Payments.Requests;
 using PayzeSDK.Payments.Responses;
 
@@ -5,20 +6,25 @@ namespace PayzeSDK.Payments.Abstractions
 {
     public interface IPayment
     {
-        public JustPayResponse JustPay(JustPayRequest justPayRequest );
+        /// <exception cref="PaymentException">Throws in case of unsuccessful request</exception>
+        public JustPayResponse JustPay(JustPay justPay );
 
-        public AddCardResponse AddCard(AddCardPaymentRequest addCardPaymentRequest );
+        /// <exception cref="PaymentException">Throws in case of unsuccessful request</exception>
+        public AddCardPaymentResponse AddCard(AddCardRequest addCardRequest );
         
-        public PayWithCardResponse PayWithCard(PayWithCardPaymentRequest payWithCardPaymentRequest );
+        /// <exception cref="PaymentException">Throws in case of unsuccessful request</exception>
+        public PayWithCardResponse PayWithCard(PayWithCard payWithCard );
         
-        public PayWithCardAndSplitResponse PayWithCardAndSplit(PayWithCardAndSplitPaymentRequest payWithCardAndSplitPaymentRequest );
+        /// <exception cref="PaymentException">Throws in case of unsuccessful request</exception>
+        public GetTransactionInformationResponse GetTransactionInformation(GetTransactionInformationRequest getTransactionInformationRequest );
         
-        public GetTransactionInformationResponse GetTransactionInformation(GetTransactionInformationPaymentRequest getTransactionInformationPaymentRequest );
+        /// <exception cref="PaymentException">Throws in case of unsuccessful request</exception>
+        public RefundTransactionResponse RefundTransaction(RefundTransactionRequest refundTransactionRequest );
         
-        public RefundTransactionResponse RefundTransaction(RefundTransactionPaymentRequest refundTransactionPaymentRequest );
+        /// <exception cref="PaymentException">Throws in case of unsuccessful request</exception>
+        public GetMerchantBalancePaymentResponse GetMerchantBalance(GetMerchantBalanceRequest getMerchantBalanceRequest );
         
-        public GetMerchantBalanceResponse GetMerchantBalance(GetMerchantBalancePaymentRequest getMerchantBalancePaymentRequest );
-        
-        public CommitTransactionResponse CommitTransaction(CommitTransactionPaymentRequest commitTransactionPaymentRequest );
+        /// <exception cref="PaymentException">Throws in case of unsuccessful request</exception>
+        public CommitTransactionPaymentResponse CommitTransaction(CommitTransactionRequest commitTransactionRequest );
     }
 }
