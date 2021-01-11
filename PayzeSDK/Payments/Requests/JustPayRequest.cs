@@ -1,13 +1,14 @@
 using System.Collections.Generic;
+using Newtonsoft.Json;
 using PayzeSDK.Payments.Abstractions;
 using PayzeSDK.Payments.Enums;
 using PayzeSDK.Payments.Requests.Helpers;
 
 namespace PayzeSDK.Payments.Requests
 {
-    public class JustPay : PaymentWithCurrency, IPaymentRequest
+    public class JustPayRequest : IPaymentRequest
     {
-        public JustPay(decimal amount, Currency currency, bool preauthorize, string callbackUrl = null, 
+        public JustPayRequest(decimal amount, Currency currency, bool preauthorize, string callbackUrl = null, 
             string callbackErrorUrl = null, List<Split> splits = null)
         {
             // Required
@@ -24,6 +25,8 @@ namespace PayzeSDK.Payments.Requests
         
         public decimal Amount { get; set; }
 
+        public Currency Currency { get; set; }
+
         public string CallbackUrl { get; set; }
 
         public string CallbackErrorUrl { get; set; }
@@ -31,6 +34,5 @@ namespace PayzeSDK.Payments.Requests
         public bool Preauthorize { get; set; }
         
         public List<Split> Splits { get; set; }
-        public Currency Currency { get; set; }
     }
 }

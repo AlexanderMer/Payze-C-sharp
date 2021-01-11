@@ -1,4 +1,6 @@
-﻿using PayzeSDK.Payments.Abstractions;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using PayzeSDK.Payments.Abstractions;
 using PayzeSDK.Payments.Exceptions;
 using PayzeSDK.Payments.Requests;
 using PayzeSDK.Payments.Responses;
@@ -13,7 +15,7 @@ namespace PayzeSDK.Payments
             Key = apiKey;
             Secret = apiSecret;
         }
-        
+
         public string Key { get; }
 
         public string Secret { get; }
@@ -23,12 +25,12 @@ namespace PayzeSDK.Payments
     {
         private readonly ApiKey _apiKey;
         private readonly RestClient _restClient = new RestClient("https://payze.io/api/v1") {Timeout = -1};
-        
+
         public Payment(ApiKey apiKey)
         {
             _apiKey = apiKey;
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -40,24 +42,26 @@ namespace PayzeSDK.Payments
         {
             var result = _restClient.Execute<T>(restRequest);
 
-            if (!result.IsSuccessful)
-            {
-                throw new PaymentException(result.ErrorMessage);
-            }
+            if (result.IsSuccessful) return result.Data;
             
-            return result.Data;
+            var message = result?.ErrorException?.InnerException?.Message;
+            throw new PaymentException(message);
+
         }
 
         private T MakePaymentRequest<T>(IPaymentRequest paymentRequest)
         {
             var request = new RestRequest(Method.POST);
-            
-            var body = GetBaseRequestJson(); 
+
+            var body = GetBaseRequestJson();
             body.Add("method", paymentRequest.Method);
             body.Add("data", paymentRequest);
-            
+
+            var bodyString = JsonConvert.SerializeObject(body,
+                new JsonSerializerSettings() {ContractResolver = new CamelCasePropertyNamesContractResolver()});
+
             request.AddHeader("Content-Type", "application/json");
-            request.AddParameter("application/json", body, ParameterType.RequestBody);
+            request.AddParameter("application/json", bodyString, ParameterType.RequestBody);
 
             return MakeRequest<T>(request);
         }
@@ -66,10 +70,10 @@ namespace PayzeSDK.Payments
         {
             return new JsonObject {{"apiKey", _apiKey.Key}, {"apiSecret", _apiKey.Secret}};
         }
-        
-        public JustPayResponse JustPay(JustPay justPay)
+
+        public JustPayResponse JustPay(JustPayRequest justPayRequest)
         {
-            return MakePaymentRequest<JustPayResponse>(justPay);
+            return MakePaymentRequest<JustPayResponse>(justPayRequest);
         }
 
         public AddCardPaymentResponse AddCard(AddCardRequest addCardRequest)
@@ -77,9 +81,9 @@ namespace PayzeSDK.Payments
             return MakePaymentRequest<AddCardPaymentResponse>(addCardRequest);
         }
 
-        public PayWithCardResponse PayWithCard(PayWithCard payWithCard)
+        public PayWithCardResponse PayWithCard(PayWithCardRequest payWithCardRequest)
         {
-            return MakePaymentRequest<PayWithCardResponse>(payWithCard);
+            return MakePaymentRequest<PayWithCardResponse>(payWithCardRequest);
         }
 
         public GetTransactionInformationResponse GetTransactionInformation(

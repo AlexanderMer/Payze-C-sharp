@@ -7,13 +7,13 @@ namespace PayzeSDK.Payments.Abstractions
     public interface IPayment
     {
         /// <exception cref="PaymentException">Throws in case of unsuccessful request</exception>
-        public JustPayResponse JustPay(JustPay justPay );
+        public JustPayResponse JustPay(JustPayRequest justPayRequest );
 
         /// <exception cref="PaymentException">Throws in case of unsuccessful request</exception>
         public AddCardPaymentResponse AddCard(AddCardRequest addCardRequest );
         
         /// <exception cref="PaymentException">Throws in case of unsuccessful request</exception>
-        public PayWithCardResponse PayWithCard(PayWithCard payWithCard );
+        public PayWithCardResponse PayWithCard(PayWithCardRequest payWithCardRequest );
         
         /// <exception cref="PaymentException">Throws in case of unsuccessful request</exception>
         public GetTransactionInformationResponse GetTransactionInformation(GetTransactionInformationRequest getTransactionInformationRequest );

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Newtonsoft.Json;
 using PayzeSDK.Payments.Abstractions;
 using PayzeSDK.Payments.Enums;
 using PayzeSDK.Payments.Requests.Helpers;
@@ -6,10 +7,9 @@ using PayzeSDK.Payments.Requests.Helpers;
 namespace PayzeSDK.Payments.Requests
 {
     // ReSharper disable once ClassNeverInstantiated.Global
-    public class PayWithCard : PaymentWithCurrency, IPaymentRequest
+    public class PayWithCardRequest : IPaymentRequest
     {
-       
-        public PayWithCard(decimal amount, Currency currency, bool preauthorize, string cardToken, 
+        public PayWithCardRequest(decimal amount, Currency currency, bool preauthorize, string cardToken, 
             List<Split> splits = null)
         {
             // Required
@@ -25,6 +25,8 @@ namespace PayzeSDK.Payments.Requests
         public string Method { get; } = "payWithCard";
         
         public decimal Amount { get; set; }
+
+        public Currency Currency { get; set; }
         
         public bool Preauthorize { get; set; }
         
