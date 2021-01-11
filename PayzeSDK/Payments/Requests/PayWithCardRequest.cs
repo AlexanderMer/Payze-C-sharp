@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using PayzeSDK.Payments.Abstractions;
 using PayzeSDK.Payments.Enums;
-using PayzeSDK.Payments.Requests.Helpers;
 
 namespace PayzeSDK.Payments.Requests
 {

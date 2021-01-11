@@ -1,4 +1,4 @@
-namespace PayzeSDK.Payments.Requests.Helpers
+namespace PayzeSDK.Payments
 {
     // ReSharper disable once ClassNeverInstantiated.Global
     public class Split
@@ -9,5 +9,7 @@ namespace PayzeSDK.Payments.Requests.Helpers
         public decimal SplitAmount { get; set; }
 
         public int PayIn { get; set; }
+
+        public CashOutOrder CashOutOrder { get; set; }
     }
 }
