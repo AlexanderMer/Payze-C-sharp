@@ -1,4 +1,5 @@
 using System;
+using PayzeSDK.Payments.Enums;
 
 namespace PayzeSDK.Payments.Responses.Helpers
 {
@@ -6,9 +7,9 @@ namespace PayzeSDK.Payments.Responses.Helpers
     {
         public DateTime Date { get; set; }
 
-        public string StatusBefore { get; set; }
+        public PaymentStatus StatusBefore { get; set; }
 
-        public string Status { get; set; }
+        public PaymentStatus Status { get; set; }
 
         public string ChangeType { get; set; }
     }

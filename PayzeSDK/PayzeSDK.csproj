@@ -2,11 +2,14 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
+        <Company>Payze</Company>
+        <AssemblyVersion>0.1</AssemblyVersion>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-      <PackageReference Include="RestSharp" Version="106.11.8-alpha.0.12" />
+      <PackageReference Include="RestSharp" Version="106.11.7" />
     </ItemGroup>
 
 </Project>

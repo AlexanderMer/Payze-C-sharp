@@ -18,7 +18,7 @@ namespace PayzeSDK.Payments.Responses
         public decimal Refunded { get; set; }
         public bool HasSplit { get; set; }
         public string TransactionId { get; set; }
-        public string Status { get; set; }
+        public PaymentStatus Status { get; set; }
         public DateTime CreateDate { get; set; }
 
         public GetTransactionInformationResponse Response
