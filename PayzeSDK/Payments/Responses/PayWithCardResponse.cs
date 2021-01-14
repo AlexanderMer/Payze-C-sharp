@@ -23,7 +23,6 @@ namespace PayzeSDK.Payments.Responses
         
         public decimal FinalAmount { get; set; }
         
-        [JsonConverter(typeof(StringEnumConverter))]
         public Currency Currency { get; set; }
         
         public decimal Commission { get; set; }
