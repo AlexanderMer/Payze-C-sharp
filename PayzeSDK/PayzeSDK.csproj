@@ -5,6 +5,8 @@
         <Company>Payze</Company>
         <AssemblyVersion>0.1</AssemblyVersion>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageVersion>1.0.1</PackageVersion>
+        <Authors>Payze</Authors>
     </PropertyGroup>
 
     <ItemGroup>
