@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using PayzeSDK.Payments.Abstractions;
 using PayzeSDK.Payments.Enums;
+using PayzeSDK.Payments.Responses.Helpers;
 
 namespace PayzeSDK.Payments.Responses
 {
@@ -9,7 +10,7 @@ namespace PayzeSDK.Payments.Responses
     public class GetTransactionInformationResponse : PaymentResponse
     {
         public decimal Amount { get; set; }
-        public List<string> Log { get; set; }
+        public List<TransactionLog> Log { get; set; }
         public decimal FinalAmount { get; set; }
         public bool GetCanBeCommitted { get; set; }
         public Currency Currency { get; set; }
