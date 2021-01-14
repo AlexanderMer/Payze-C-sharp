@@ -33,7 +33,7 @@ namespace PayzeSDK.Payments
 
         public bool HasSplit { get; set; }
 
-        public string Status { get; set; }
+        public PaymentStatus Status { get; set; }
 
         public DateTime CreateDate { get; set; }
     }
