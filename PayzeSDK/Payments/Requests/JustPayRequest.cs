@@ -7,7 +7,8 @@ namespace PayzeSDK.Payments.Requests
 {
     public class JustPayRequest : IPaymentRequest
     {
-        public JustPayRequest(decimal amount, Currency currency, bool preauthorize, string callbackUrl = null, 
+        public JustPayRequest(decimal amount, Currency currency, bool preauthorize,
+            string callbackUrl = null,
             string callbackErrorUrl = null, List<Split> splits = null)
         {
             // Required
@@ -29,6 +30,8 @@ namespace PayzeSDK.Payments.Requests
         public string CallbackUrl { get; set; }
 
         public string CallbackErrorUrl { get; set; }
+        
+        public string HookUrl { get; set; }
 
         public bool Preauthorize { get; set; }
         

@@ -17,5 +17,7 @@ namespace PayzeSDK.Payments.Requests
         public string CallbackUrl { get; set; }
 
         public string CallbackErrorUrl { get; set; }
+
+        public string HookUrl { get; set; }
     }
 }
