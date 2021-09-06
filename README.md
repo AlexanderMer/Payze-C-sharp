@@ -19,7 +19,7 @@ For Example: justPay takes _JustPayRequest_ object and returns _JustPayResponse_
         /*
               JustPayResponse result = PaymentGate.JustPay(new JustPayRequest
                 (
-                    (decimal) 0.1,
+                    (decimal) 1.0,
                     Currency.GEL,
                     false
                 ));
@@ -59,7 +59,7 @@ For Example: justPay takes _JustPayRequest_ object and returns _JustPayResponse_
             {
                 var result = PaymentGate.JustPay(new JustPayRequest
                 (
-                    (decimal) 0.1,
+                    (decimal) 1.0,
                     Currency.GEL,
                     false
                 ));
@@ -81,7 +81,7 @@ For Example: justPay takes _JustPayRequest_ object and returns _JustPayResponse_
             {
                 var result = PaymentGate.JustPay(new JustPayRequest
                     (
-                        (decimal) 0.1,
+                        (decimal) 2.0,
                         Currency.GEL,
                         false
                     )
@@ -142,7 +142,7 @@ For Example: justPay takes _JustPayRequest_ object and returns _JustPayResponse_
             try
             {
                 var result = PaymentGate.PayWithCard(new PayWithCardRequest(
-                    (decimal) 0.1, Currency.GEL, false, _cardToken)
+                    (decimal) 2.0, Currency.GEL, false, _cardToken)
                 {
                     Splits = new List<Split>() {new Split() {IBAN = _iban, SplitAmount = 1}}
                 });
