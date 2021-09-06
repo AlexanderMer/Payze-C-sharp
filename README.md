@@ -13,7 +13,7 @@ The Payments class all Payze operations like _justPay_, _addCard_, _payWithCard_
 All requests and responses are wrapped in their respective classes.  
 For Example: justPay takes _JustPayRequest_ object and returns _JustPayResponse_
 ## Example Program
-```
+```C#
   internal static class Program
     {
         /*
