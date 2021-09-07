@@ -1,7 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.1</TargetFramework>
+		<TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
         <Company>Payze</Company>
         <AssemblyVersion>0.1</AssemblyVersion>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -9,7 +9,16 @@
         <Authors>Payze</Authors>
     </PropertyGroup>
 
-    <ItemGroup>
+	<ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.0.0" />
+	</ItemGroup>
+	
+	
+	<ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.1' ">
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
       <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
       <PackageReference Include="RestSharp" Version="106.11.7" />
     </ItemGroup>
