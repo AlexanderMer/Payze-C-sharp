@@ -13,7 +13,8 @@ Added support for Dotnet standard 2.0
 Request methods are now async
 Added Support for MVC Dependency Injection
 Upgraded RestSharp dependency to mitigate vulnerability
-        </PackageReleaseNotes>
+ 
+ Kudos to Gabina12 for contribution</PackageReleaseNotes>
         <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
     </PropertyGroup>
 
