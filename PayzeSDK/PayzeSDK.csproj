@@ -1,17 +1,24 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.1</TargetFramework>
         <Company>Payze</Company>
         <AssemblyVersion>0.1</AssemblyVersion>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageVersion>1.0.3</PackageVersion>
+        <PackageVersion>2.0.0</PackageVersion>
         <Authors>Payze</Authors>
+        <Title>Payze SDK</Title>
+        <PackageReleaseNotes>**Warning** this version intorudces breaking changes
+Added support for Dotnet standard 2.0 
+Request methods are now async
+Added Support for MVC Dependency Injection
+Upgraded RestSharp dependency to mitigate vulnerability
+        </PackageReleaseNotes>
+        <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-      <PackageReference Include="RestSharp" Version="106.11.7" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+      <PackageReference Include="RestSharp" Version="106.12.0" />
     </ItemGroup>
 
 </Project>
